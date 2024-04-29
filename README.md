@@ -1,2 +1,4 @@
 # dotnet.nvim
-A little plugin for improving the experience of developing .NET apps using Neovim written completely in Lua
+A little Neovim plugin for improving the .NET dev experience in Neovim,  written completely in Lua
+
+# [under development]
