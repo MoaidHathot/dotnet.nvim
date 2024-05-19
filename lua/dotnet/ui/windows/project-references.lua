@@ -1,6 +1,6 @@
 -- local window_utils = require('lua.dotnet.ui.windows.window-utils')
-local window_utils = require('lua.dotnet.ui.windows.window-utils')
-local path_utils = require('lua.dotnet.utils.path-utils')
+local window_utils = require('dotnet.ui.windows.window-utils')
+local path_utils = require('dotnet.utils.path-utils')
 
 local M = {}
 

@@ -1,6 +1,6 @@
-local nvim_utils = require ('lua.dotnet.utils.nvim-utils')
+local nvim_utils = require ('dotnet.utils.nvim-utils')
 local telescope_utils = require('telescope.previewers.utils')
-local ui_utils = require('lua.dotnet.ui.ui-utils')
+local ui_utils = require('dotnet.ui.ui-utils')
 
 local M = { }
 

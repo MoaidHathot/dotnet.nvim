@@ -1,5 +1,5 @@
 local scandir = require('plenary.scandir')
-local path_utils = require('lua.dotnet.utils.path-utils')
+local path_utils = require('dotnet.utils.path-utils')
 
 local M = {}
 

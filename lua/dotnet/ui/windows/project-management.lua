@@ -1,8 +1,8 @@
-local window_utils = require('lua.dotnet.ui.windows.window-utils')
-local ui_utils = require('lua.dotnet.ui.ui-utils')
+local window_utils = require('dotnet.ui.windows.window-utils')
+local ui_utils = require('dotnet.ui.ui-utils')
 local telescope_utils = require('telescope.previewers.utils')
-local dotnet_utils = require('lua.dotnet.utils.dotnet-utils')
-local path_utils = require('lua.dotnet.utils.path-utils')
+local dotnet_utils = require('dotnet.utils.dotnet-utils')
+local path_utils = require('dotnet.utils.path-utils')
 
 local M = {}
 
