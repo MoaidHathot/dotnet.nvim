@@ -1,6 +1,6 @@
-local dotnet_utils = require('lua.dotnet.utils.dotnet-utils')
-local nvim_utils = require('lua.dotnet.utils.nvim-utils')
-local ui = require("lua.dotnet.ui.ui")
+local dotnet_utils = require('dotnet.utils.dotnet-utils')
+local nvim_utils = require('dotnet.utils.nvim-utils')
+local ui = require("dotnet.ui.ui")
 
 local M = {}
 
