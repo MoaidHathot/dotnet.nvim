@@ -15,7 +15,7 @@ end
 -- package.loaded['lua.dotnet.utils.dotnet-utils'] = nil
 -- package.loaded['lua.dotnet.ui.ui-utils'] = nil
 
-local dotnet = require('lua.dotnet.dotnet')
+local dotnet = require('lua.dotnet')
 
 local completions = {
 	DotnetUI = {
