@@ -17,7 +17,6 @@ M.bootstrap_new_csharp_file = function(opts)
 		line_start = 0
 	end
 
-	print('names: ', vim.inspect(names))
 	if not names or not names.namespace then
 		return
 	end

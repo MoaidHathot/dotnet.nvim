@@ -5,7 +5,6 @@ local M = {}
 
 M.get_curr_file_and_namespace = function()
 	local path = vim.fn.expand('%:p')
-	print('Path: ', path)
 
 	path = string.gsub(path, "\\", "/")
 
@@ -29,7 +28,6 @@ M.get_curr_file_and_namespace = function()
 		curr_directory = string.gsub(curr_directory, directory_to_remove, "")
 		local foundFiles = scandir.scan_dir(curr_directory, { depth = 1 })
 		for _, file in pairs(foundFiles) do
-			print('found: ', file)
 			if result.csproj == nil then
 				if string.match(file, ".csproj") then
 					result.csproj = { file = file, directory = curr_directory }
