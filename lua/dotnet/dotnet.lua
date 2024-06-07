@@ -6,7 +6,7 @@ local M = {}
 
 M.bootstrap_new_csharp_file = function(opts)
 	opts = opts or {}
-	local names = dotnet_utils.get_curr_file_and_namespace()
+	local names = dotnet_utils.get_file_and_namespace(opts.path)
 	local buffer = vim.api.nvim_get_current_buf()
 	local line_count = vim.api.nvim_buf_line_count(buffer)
 
