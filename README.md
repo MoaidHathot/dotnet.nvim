@@ -10,6 +10,7 @@ A little Neovim plugin for improving the .NET dev experience in Neovim, written 
 
 # Dependencies
 - Neovim 0.8+ (Could work with older versions, but not tested)
+- Telescope
 - Dotnet SDK (https://dotnet.microsoft.com/download)
 
 # Installation and Usage
