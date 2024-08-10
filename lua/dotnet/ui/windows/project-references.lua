@@ -48,7 +48,7 @@ end
 M.open_add_project_reference_window = function()
 	_open_project_reference_management_window({
 		action = 'add',
-		first_selection_title = 'Seledct a project to add reference to',
+		first_selection_title = 'Select a project to add reference to',
 		second_selection_title = 'Select a project to reference'
 	})
 end
@@ -56,7 +56,7 @@ end
 M.open_remove_project_reference_window = function()
 	_open_project_reference_management_window({
 		action = 'remove',
-		first_selection_title = 'Seledct a project to remove reference from',
+		first_selection_title = 'Select a project to remove reference from',
 		second_selection_title = 'Select a referenced project',
 		second_command_generator = function(opts)
 			return {
