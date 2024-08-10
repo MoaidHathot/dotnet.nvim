@@ -3,8 +3,9 @@ A little Neovim plugin for improving the .NET dev experience in Neovim, written 
 
 # Features
 - Cross Platform (Windows, Linux, MacOS)
-- Add/Remove Nuget Window
+- Add/Remove Nuget Windows
 - Add/Remove Project Reference Windows
+- Add new projects/sln/globaljson/any installed dotnet template
 - Bootstrap a new cs file with a class
 
 # Dependencies
@@ -55,4 +56,8 @@ use {
 ```cmd
 :DotnetUI project reference remove
 ```
+![image](https://github.com/user-attachments/assets/f2ea8994-869a-484c-b77e-72988a08d104)
 
+![image](https://github.com/user-attachments/assets/0d98e570-d6d8-42a2-8af5-b84c35bd44a5)
+
+![image](https://github.com/user-attachments/assets/04d4fc21-79c6-4376-883a-7d600837403b)
