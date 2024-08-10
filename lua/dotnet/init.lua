@@ -4,6 +4,7 @@ M.setup = function(opts)
 	M.opts = opts
 end
 
+--Useful for debugging
 -- package.loaded['lua.dotnet.dotnet'] = nil
 -- package.loaded['lua.dotnet.ui.ui'] = nil
 -- package.loaded['lua.dotnet.ui.windows.project-references'] = nil

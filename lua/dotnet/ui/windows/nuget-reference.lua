@@ -6,6 +6,13 @@ local plenary = require('plenary')
 
 local M = {}
 
+local _format_number_with_commas = function(number)
+    local formatted = tostring(number)
+    formatted = formatted:reverse():gsub("(%d%d%d)", "%1,")
+    formatted = formatted:reverse():gsub("^,", "")
+    return formatted
+end
+
 local _make_nuget_search_command = function(opts)
 	opts = opts or {}
 	local name = opts.package_name
@@ -17,7 +24,7 @@ local _make_nuget_search_command = function(opts)
 	name = string.gsub(name, " ", "+")
 
 	--Todo: Add support for other sources
-	local url = 'https://azuresearch-ussc.nuget.org/query?q=' .. name
+	local url = 'https://azuresearch-ussc.nuget.org/query?q=' .. name .. '&prerelease=true'
 	local job_opts = {
 		command = "curl",
 		args = { url },
@@ -36,7 +43,6 @@ local _make_nuget_search_command = function(opts)
 	return entries
 end
 
-
 local _nuget_explorer_live_preview_define_perview = function(self, entry)
 	local authors = {}
 	for _, v in pairs(entry.value.authors) do
@@ -48,13 +54,14 @@ local _nuget_explorer_live_preview_define_perview = function(self, entry)
 	local versions = {}
 	for _, v in pairs(entry.value.versions) do
 		if v then
-			table.insert(versions, v.version)
+			table.insert(versions, { version = v.version, downloads = v.downloads })
 		end
 	end
 
 	local bufLines = {
 
 		"# " .. entry.value.title,
+		entry.value.id,
 		"# Latest Version:",
 		entry.value.version,
 		"# Description:",
@@ -64,18 +71,19 @@ local _nuget_explorer_live_preview_define_perview = function(self, entry)
 		table.insert(bufLines, v)
 	end
 
-	table.insert(bufLines, "# Downloads:")
-	table.insert(bufLines, entry.value.totalDownloads .. '')
+	table.insert(bufLines, "# Total Downloads:")
+	table.insert(bufLines, _format_number_with_commas(entry.value.totalDownloads) .. '')
 
 	table.insert(bufLines, "# Authors:")
 
 	for _, v in pairs(authors) do
-		table.insert(bufLines, '    * ' .. v)
+		table.insert(bufLines, '* ' .. v)
 	end
 
-	table.insert(bufLines, "# Versions:")
-	for _, v in pairs(versions) do
-		table.insert(bufLines, '    * ' .. v)
+	table.insert(bufLines, "# Versions | Downloads:")
+	for i = #versions, 1, -1 do
+		local v = versions[i]
+		table.insert(bufLines, '* ' .. v.version .. ' | ' .. _format_number_with_commas(v.downloads))
 	end
 
 	vim.api.nvim_buf_set_lines(self.state.bufnr, 0, 0, true, bufLines)
@@ -91,8 +99,8 @@ local _show_nuget_explorer_selection_window = function(selection_opts)
 		if entry then
 			return {
 				value = entry,
-				display = entry.title,
-				ordinal = entry.title
+				display = entry.id,
+				ordinal = entry.title .. ' ' .. entry.id,
 			}
 		end
 	end
@@ -165,7 +173,6 @@ local _open_project_package_management_window = function(opts)
 	window_utils.open_project_selection_window(source_selection_opt)
 end
 
-
 M.open_add_package_window = function()
 	_open_project_package_management_window({
 		action = 'add',
@@ -182,5 +189,6 @@ M.open_remove_package_window = function()
 	})
 end
 
+_show_nuget_explorer_selection_window({})
 
 return M
