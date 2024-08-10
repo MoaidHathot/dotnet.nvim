@@ -42,16 +42,16 @@ M.get_file_and_namespace = function(path)
 
     local namespace = ''
     if result.slnx ~= nil then
-        namespace = M.get_namespace_from_path(path, result.slnx.directory)
+        namespace = M.get_namespace_from_path(result.slnx.file, result.slnx.directory)
     elseif result.sln ~= nil then
-        namespace = M.get_namespace_from_path(path, result.sln.directory)
+        namespace = M.get_namespace_from_path(result.sln.directory, result.sln.directory)
     elseif result.csproj ~= nil then
-        namespace = M.get_namespace_from_path(path, result.csproj.directory)
+        namespace = M.get_namespace_from_path(result.csproj.file, result.csproj.directory)
     end
 
     namespace = string.gsub(namespace, "%." .. file_base_name .. "%..*$", "")
-    namespace = string.gsub(namespace, "^%.", "")
-    namespace = string.gsub(namespace, "%.$", "")
+    namespace = string.gsub(namespace, "^%.+", "")
+    namespace = string.gsub(namespace, "%..*$", "")
 
     return {
         namespace = namespace,

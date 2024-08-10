@@ -70,7 +70,6 @@ function M.get_file_path_namespace(file_path)
 
       if M.tbl_contains_pattern(dir, ".*.csproj") then
         project = path
-		log.warn("Breaking ...")
         break
       end
 
