@@ -9,9 +9,10 @@ A little Neovim plugin for improving the .NET dev experience in Neovim, written 
 - Bootstrap a new cs file with a class
 
 # Dependencies
-- Neovim 0.8+ (Could work with older versions, but not tested)
-- Telescope
-- Dotnet SDK (https://dotnet.microsoft.com/download)
+- Neovim 0.8+ (May work with older versions, but not tested)
+- [Telescope](https://github.com/nvim-telescope/telescope.nvim)
+- [fd](https://github.com/sharkdp/fd)
+- [.NET SDK](https://dotnet.microsoft.com/download)
 
 # Installation and Usage
 - [Lazy.nvim](https://github.com/folke/lazy.nvim)
