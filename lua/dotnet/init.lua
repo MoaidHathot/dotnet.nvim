@@ -5,17 +5,17 @@ M.setup = function(opts)
 end
 
 --Useful for debugging
--- package.loaded['lua.dotnet'] = nil
--- package.loaded['lua.dotnet.dotnet'] = nil
--- package.loaded['lua.dotnet.ui.ui'] = nil
--- package.loaded['lua.dotnet.ui.windows.project-references'] = nil
--- package.loaded['lua.dotnet.ui.windows.project-management'] = nil
--- package.loaded['lua.dotnet.ui.windows.nuget-reference'] = nil
--- package.loaded['lua.dotnet.ui.windows.window-utils'] = nil
--- package.loaded['lua.dotnet.utils.nvim-utils'] = nil
--- package.loaded['lua.dotnet.utils.path-utils'] = nil
--- package.loaded['lua.dotnet.utils.dotnet-utils'] = nil
--- package.loaded['lua.dotnet.ui.ui-utils'] = nil
+-- package.loaded['dotnet'] = nil
+-- package.loaded['dotnet.dotnet'] = nil
+-- package.loaded['dotnet.ui.ui'] = nil
+-- package.loaded['dotnet.ui.windows.project-references'] = nil
+-- package.loaded['dotnet.ui.windows.project-management'] = nil
+-- package.loaded['dotnet.ui.windows.nuget-reference'] = nil
+-- package.loaded['dotnet.ui.windows.window-utils'] = nil
+-- package.loaded['dotnet.utils.nvim-utils'] = nil
+-- package.loaded['dotnet.utils.path-utils'] = nil
+-- package.loaded['dotnet.utils.dotnet-utils'] = nil
+-- package.loaded['dotnet.ui.ui-utils'] = nil
 
 local dotnet = require('dotnet.dotnet')
 
