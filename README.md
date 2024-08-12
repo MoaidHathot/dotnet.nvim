@@ -1,7 +1,7 @@
 # dotnet.nvim
 A little Neovim plugin for improving the .NET dev experience in Neovim, written completely in Lua
 
-https://github.com/user-attachments/assets/937e6ebb-2e3a-4be1-9031-f6a06fe425cd
+https://github.com/user-attachments/assets/7be996dc-3612-46dc-aeca-d8a5c1a2a418
 
 # Features
 - Cross Platform (Windows, Linux, MacOS)
