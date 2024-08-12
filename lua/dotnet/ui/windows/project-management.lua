@@ -33,7 +33,6 @@ local _extract_project_template_from_cli_result = function(entry)
 	return result
 end
 
-
 M.show_project_creation_window = function()
 	local opts = {
 		telescope = window_utils.create_telescope_options(),
@@ -101,11 +100,7 @@ M.show_project_creation_window = function()
 			end
 		},
 		attach_mappings = function(_, selection)
-			local name = vim.fn.input("Project name with path: ")
-
-			if name == nil or name == '' then
-				return
-			end
+			local name = vim.fn.input("Name with path: ")
 
 			name = string.gsub(name, "\\", "/")
 
@@ -122,7 +117,12 @@ M.show_project_creation_window = function()
 
 			local template_name = string.match(selection.short_name, "([^,]+)")
 
-			local command = "!dotnet new " .. template_name .. " -n " .. name .. output
+			local name_arguments = ''
+			if name ~= nil and name ~= '' then
+				name_arguments = ' -n ' .. name
+			end
+
+			local command = "!dotnet new " .. template_name .. name_arguments .. output
 			vim.cmd(command)
 		end
 	}

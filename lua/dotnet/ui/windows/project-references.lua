@@ -60,7 +60,7 @@ M.open_remove_project_reference_window = function()
 		second_selection_title = 'Select a referenced project',
 		second_command_generator = function(opts)
 			return {
-				'dotnet', 'list', opts.add_to_project.value,  'reference'
+				'dotnet', 'list', opts.add_to_project.value, 'reference'
 			}
 		end,
 		second_result_filter = function(_, entry)
