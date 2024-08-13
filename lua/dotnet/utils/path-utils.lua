@@ -53,52 +53,55 @@ function M.get_parent_directory(path)
 end
 
 function M.get_file_path_namespace(file_path)
-  local path = file_path
-  local path_tmp
-  local cwd = vim.fn.getcwd()
-  local project
-  local project_parent
-  local dir
+	local path = file_path
+	local path_tmp
+	local cwd = vim.fn.getcwd()
+	local project
+	local project_parent
+	local dir
 
-  path = M.get_parent_directory(path)
-  path_tmp = path
+	path = M.get_parent_directory(path)
+	path_tmp = path
 
-  -- Get project path
-  if file_path ~= nil then
-    while true do
-      dir = scan.scan_dir(path, { hidden = true, depth = 1 })
+	-- Get project path
+	if file_path ~= nil then
+		while true do
+			dir = scan.scan_dir(path, { hidden = true, depth = 1 })
 
-      if M.tbl_contains_pattern(dir, ".*.csproj") then
-        project = path
-        break
-      end
+			if M.tbl_contains_pattern(dir, ".*.csproj") or M.tbl_contains_pattern(dir, ".*.fsproj") then
+				project = path
+				log.warn("Breaking ...")
+				break
+			end
 
-      if path == cwd then
-        return cwd
-      end
+			if path == cwd then
+				return cwd
+			end
 
-      path = M.get_parent_directory(path)
-    end
+			path = M.get_parent_directory(path)
+		end
 
-    if project and path_tmp then
-      project_parent = M.get_parent_directory(project)
+		if project and path_tmp then
+			project_parent = M.get_parent_directory(project)
 
-      return path_tmp:gsub(project_parent, ""):sub(2):gsub("/", ".")
-    else
-      log.error("Failed to find parent project")
-      return cwd
-    end
-  else
-    log.error("Failed to find parent project")
-    return cwd
-  end
+			return path_tmp:gsub(project_parent, ""):sub(2):gsub("/", ".")
+		else
+			log.error("Failed to find parent project")
+			return cwd
+		end
+	else
+		log.error("Failed to find parent project")
+		return cwd
+	end
 end
 
 function M.get_projects()
-  local csproj_paths = scan.scan_dir(vim.fn.getcwd(), { search_pattern = ".*.csproj$" })
-
-  return csproj_paths
+	local csproj_paths = scan.scan_dir(vim.fn.getcwd(), { search_pattern = ".*.csproj$" }) or {}
+	local fsproj_paths = scan.scan_dir(vim.fn.getcwd(), { search_pattern = ".*.fsproj$" }) or {}
+	local proj_paths = vim.tbl_extend("force", csproj_paths, fsproj_paths)
+	return proj_paths
 end
+M.get_projects()
 
 M.get_project_name_and_directory = function(name_with_path)
 	name_with_path = string.gsub(name_with_path, "\\", "/")
@@ -117,4 +120,3 @@ M.get_project_name_and_directory = function(name_with_path)
 end
 
 return M
-
