@@ -15,7 +15,7 @@ https://github.com/user-attachments/assets/7be996dc-3612-46dc-aeca-d8a5c1a2a418
 - [Telescope](https://github.com/nvim-telescope/telescope.nvim)
 - [.NET SDK](https://dotnet.microsoft.com/download)
 
-# Installation and Usage
+# Installation
 - [Lazy.nvim](https://github.com/folke/lazy.nvim)
 ```lua
 {
@@ -29,9 +29,20 @@ https://github.com/user-attachments/assets/7be996dc-3612-46dc-aeca-d8a5c1a2a418
 use {
     'MoaidHathot/dotnet.nvim',
         config = function()
-            require("dotnet").setup()
+            require("dotnet").setup({})
         end
 }
+```
+
+# Configuration
+`dotnet.nvim` comes with the following defaults:
+```lua
+	{
+		bootstrap = {
+			auto_bootstrap = true, -- Automatically call "bootstrap" when creating a new file, adding a namespace and a class to the files
+		}
+	}
+
 ```
 
 # Usage
