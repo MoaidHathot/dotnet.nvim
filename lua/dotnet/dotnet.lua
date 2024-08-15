@@ -11,7 +11,7 @@ M.bootstrap_new_csharp_file = function(opts)
 	local line_count = vim.api.nvim_buf_line_count(buffer)
 
 	local line_end = line_count
-	local line_start = line_count
+	local line_start = line_count - 1
 
 	if opts.append == false then
 		line_start = 0

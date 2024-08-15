@@ -52,6 +52,10 @@ M.get_file_and_namespace = function(path)
     namespace = string.gsub(namespace, "^%.+", "")
     namespace = string.gsub(namespace, "%..*$", "")
 
+	if namespace == " " or namespace == '' then
+		namespace = path_utils.get_last_path_part(path_utils.get_parent_directory(path))
+	end
+
     return {
         namespace = namespace,
         file_name = file_base_name,

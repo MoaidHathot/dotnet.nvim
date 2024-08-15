@@ -1,6 +1,7 @@
 local log = require("plenary.log"):new()
 local M = {}
 local scan = require "plenary.scandir"
+
 function M.tbl_contains_pattern(t, pattern)
   vim.validate { t = { t, "t" } }
   for _, v in ipairs(t) do
@@ -10,11 +11,13 @@ function M.tbl_contains_pattern(t, pattern)
   end
   return false
 end
+
 function M.cwd_contains_pattern(pattern)
   local dir = scan.scan_dir(".", { hidden = true, depth = 1 })
   local result = M.tbl_contains_pattern(dir, pattern)
   return result
 end
+
 function M.is_directory(path)
   if vim.fn.isdirectory(path) == 1 then
     return true
@@ -22,6 +25,7 @@ function M.is_directory(path)
     return false
   end
 end
+
 function M.get_last_path_part(path)
 	local part = nil
 	for current_match in string.gmatch(path, "[^/\\]+") do
@@ -29,6 +33,7 @@ function M.get_last_path_part(path)
 	end
 	return part
 end
+
 function M.get_parent_directory(path)
   local directory
   local split = path:match "/[^/]*$"
