@@ -44,7 +44,7 @@ M.get_file_and_namespace = function(path)
         namespace = M.get_namespace_from_path(result.slnx.file, result.slnx.directory)
     elseif result.sln ~= nil then
         namespace = M.get_namespace_from_path(result.sln.directory, result.sln.directory)
-    elseif result.csproj ~= nil then
+    elseif result.project ~= nil then
         namespace = M.get_namespace_from_path(result.project.file, result.project.directory)
     end
 
