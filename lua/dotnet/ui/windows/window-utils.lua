@@ -1,6 +1,7 @@
 local nvim_utils = require ('dotnet.utils.nvim-utils')
 local telescope_utils = require('telescope.previewers.utils')
 local ui_utils = require('dotnet.ui.ui-utils')
+local path_utils = require('dotnet.utils.path-utils')
 
 local M = { }
 
@@ -17,13 +18,6 @@ end
 M.open_project_selection_window = function(selection_opts)
 	local result_filter = selection_opts.result_filter or function(_, _)
 		return true
-	end
-	local command_generator = selection_opts.command_generator or function(_)
-		return vim.tbl_extend(
-				"force",
-				{ "fd", "-e", "csproj", "--type", "f" },
-				{ "fd", "-e", "fsproj", "--type", "f" } or {}
-			)
 	end
 	local entry_maker = selection_opts.entry_maker or function(entry)
 		if entry then
@@ -60,8 +54,8 @@ M.open_project_selection_window = function(selection_opts)
 			end
 		},
 		finder = {
-			command_generator = function()
-				return command_generator(selection_opts)
+			fn = function()
+				return path_utils.get_projects()
 			end,
 			entry_maker = function(entry)
 				if entry then
