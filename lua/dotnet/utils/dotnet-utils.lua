@@ -25,8 +25,8 @@ M.get_file_and_namespace = function(path)
         curr_directory = string.gsub(curr_directory, directory_to_remove, "")
         local foundFiles = scandir.scan_dir(curr_directory, { depth = 1 })
         for _, file in pairs(foundFiles) do
-            if result.proj == nil and string.match(file, "%.[fc]sproj") then
-                result.proj = { file = file, directory = curr_directory }
+            if result.project == nil and string.match(file, "%.[fc]sproj") then
+                result.project = { file = file, directory = curr_directory }
             end
             if result.sln == nil and result.slnx == nil then
                 if string.match(file, ".sln") then
@@ -43,9 +43,9 @@ M.get_file_and_namespace = function(path)
     if result.slnx ~= nil then
         namespace = M.get_namespace_from_path(result.slnx.file, result.slnx.directory)
     elseif result.sln ~= nil then
-       namespace = M.get_namespace_from_path(result.sln.directory, result.sln.directory)
+        namespace = M.get_namespace_from_path(result.sln.directory, result.sln.directory)
     elseif result.csproj ~= nil then
-        namespace = M.get_namespace_from_path(result.csproj.file, result.csproj.directory)
+        namespace = M.get_namespace_from_path(result.project.file, result.project.directory)
     end
 
     namespace = string.gsub(namespace, "%." .. file_base_name .. "%..*$", "")
