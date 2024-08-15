@@ -13,7 +13,6 @@ https://github.com/user-attachments/assets/7be996dc-3612-46dc-aeca-d8a5c1a2a418
 # Dependencies
 - Neovim 0.8+ (May work with older versions, but not tested)
 - [Telescope](https://github.com/nvim-telescope/telescope.nvim)
-- [fd](https://github.com/sharkdp/fd)
 - [.NET SDK](https://dotnet.microsoft.com/download)
 
 # Installation and Usage
