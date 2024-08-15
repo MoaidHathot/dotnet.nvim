@@ -4,9 +4,8 @@ local path_utils = require('dotnet.utils.path-utils')
 local M = {}
 
 M.get_file_and_namespace = function(path)
-	path = 	path or vim.fn.expand('%:p')
-
-	path = string.gsub(path, "\\", "/")
+    path = path or vim.fn.expand('%:p')
+    path = string.gsub(path, "\\", "/")
 
     local directory = string.match(path, "(.+/)[^/\\]+%..+$")
     local file_name = string.match(path, "[^/\\]+%..+$")
@@ -26,8 +25,8 @@ M.get_file_and_namespace = function(path)
         curr_directory = string.gsub(curr_directory, directory_to_remove, "")
         local foundFiles = scandir.scan_dir(curr_directory, { depth = 1 })
         for _, file in pairs(foundFiles) do
-            if result.csproj == nil and string.match(file, ".csproj") then
-                result.csproj = { file = file, directory = curr_directory }
+            if result.project == nil and string.match(file, "%.[fc]sproj") then
+                result.project = { file = file, directory = curr_directory }
             end
             if result.sln == nil and result.slnx == nil then
                 if string.match(file, ".sln") then
@@ -46,7 +45,7 @@ M.get_file_and_namespace = function(path)
     elseif result.sln ~= nil then
         namespace = M.get_namespace_from_path(result.sln.directory, result.sln.directory)
     elseif result.csproj ~= nil then
-        namespace = M.get_namespace_from_path(result.csproj.file, result.csproj.directory)
+        namespace = M.get_namespace_from_path(result.project.file, result.project.directory)
     end
 
     namespace = string.gsub(namespace, "%." .. file_base_name .. "%..*$", "")

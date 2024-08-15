@@ -19,7 +19,11 @@ M.open_project_selection_window = function(selection_opts)
 		return true
 	end
 	local command_generator = selection_opts.command_generator or function(_)
-		return { 'fd', '-e', 'csproj', '--type', 'f' }
+		return vim.tbl_extend(
+				"force",
+				{ "fd", "-e", "csproj", "--type", "f" },
+				{ "fd", "-e", "fsproj", "--type", "f" } or {}
+			)
 	end
 	local entry_maker = selection_opts.entry_maker or function(entry)
 		if entry then
