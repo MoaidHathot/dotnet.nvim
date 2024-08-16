@@ -37,11 +37,11 @@ use {
 # Configuration
 `dotnet.nvim` comes with the following defaults:
 ```lua
-	{
-		bootstrap = {
-			auto_bootstrap = true, -- Automatically call "bootstrap" when creating a new file, adding a namespace and a class to the files
-		}
-	}
+{
+  bootstrap = {
+    auto_bootstrap = true, -- Automatically call "bootstrap" when creating a new file, adding a namespace and a class to the files
+  }
+}
 
 ```
 
