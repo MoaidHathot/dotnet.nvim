@@ -14,7 +14,6 @@ M.create_telescope_options = function()
 	}
 end
 
-
 M.open_project_selection_window = function(selection_opts)
 	local result_filter = selection_opts.result_filter or function(_, _)
 		return true
@@ -23,7 +22,8 @@ M.open_project_selection_window = function(selection_opts)
 		if entry then
 			return {
 				value = entry,
-				display = entry,
+				-- display = entry,
+				display = path_utils.get_project_name_and_directory(entry).project_name,
 				ordinal = entry,
 			}
 		end
@@ -78,6 +78,5 @@ M.open_project_selection_window = function(selection_opts)
 
 	ui_utils.open_selection_window(opts)
 end
-
 
 return M
