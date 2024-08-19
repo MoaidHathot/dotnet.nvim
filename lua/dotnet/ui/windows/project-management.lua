@@ -33,7 +33,7 @@ local _extract_project_template_from_cli_result = function(entry)
 	return result
 end
 
-M.show_project_creation_window = function()
+M.show_project_creation_window = function(user_opts)
 	local opts = {
 		telescope = window_utils.create_telescope_options(),
 		prompt_title = "Select Project Template",

@@ -1,26 +1,38 @@
 --Useful for debugging
--- package.loaded['dotnet'] = nil
--- package.loaded['dotnet.dotnet'] = nil
--- package.loaded['dotnet.ui.ui'] = nil
--- package.loaded['dotnet.ui.windows.project-references'] = nil
--- package.loaded['dotnet.ui.windows.project-management'] = nil
--- package.loaded['dotnet.ui.windows.nuget-reference'] = nil
--- package.loaded['dotnet.ui.windows.window-utils'] = nil
--- package.loaded['dotnet.utils.nvim-utils'] = nil
--- package.loaded['dotnet.utils.path-utils'] = nil
--- package.loaded['dotnet.utils.dotnet-utils'] = nil
--- package.loaded['dotnet.ui.ui-utils'] = nil
+package.loaded['dotnet'] = nil
+package.loaded['dotnet.dotnet'] = nil
+package.loaded['dotnet.ui.ui'] = nil
+package.loaded['dotnet.ui.windows.project-references'] = nil
+package.loaded['dotnet.ui.windows.project-management'] = nil
+package.loaded['dotnet.ui.windows.nuget-reference'] = nil
+package.loaded['dotnet.ui.windows.window-utils'] = nil
+package.loaded['dotnet.utils.nvim-utils'] = nil
+package.loaded['dotnet.utils.path-utils'] = nil
+package.loaded['dotnet.utils.dotnet-utils'] = nil
+package.loaded['dotnet.utils.telescope-utils'] = nil
+package.loaded['dotnet.ui.ui-utils'] = nil
 
 local M = {
 	opts = {
 		bootstrap = {
 			auto_bootstrap = true,
+		},
+		project_selection = {
+			path_display = 'filename_first', -- filename_first, tail
 		}
 	}
 }
 
-M.setup = function(opts)
+local function _process_user_opts(opts)
+
 	require('dotnet.utils.nvim-utils').merge_tables(M.opts, opts)
+
+	return M.opts
+end
+
+M.setup = function(opts)
+
+	M.opts = _process_user_opts(opts)
 
 	local dotnet = require('dotnet.dotnet')
 
@@ -102,7 +114,7 @@ M.setup = function(opts)
 
 	if M.opts.bootstrap.auto_bootstrap then
 		vim.api.nvim_create_autocmd("BufReadPost", {
-			pattern = { "*.cs", "*.fs" },
+			pattern = { "*.cs" },
 			callback = function()
 				local buf = vim.api.nvim_get_current_buf()
 				local line_count = vim.api.nvim_buf_line_count(buf)
@@ -113,6 +125,9 @@ M.setup = function(opts)
 			end,
 		})
 	end
+
 end
+
+M.setup (M.opts)
 
 return M

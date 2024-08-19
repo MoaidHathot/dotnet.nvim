@@ -90,7 +90,7 @@ local _nuget_explorer_live_preview_define_perview = function(self, entry)
 	telescope_utils.highlighter(self.state.bufnr, "markdown")
 end
 
-local _show_nuget_explorer_selection_window = function(selection_opts)
+local _show_nuget_explorer_selection_window = function(user_opts, selection_opts)
 	local command_generator = selection_opts.command_generator
 	local fn = command_generator or selection_opts.fn or function(prompt)
 		return _make_nuget_search_command({ package_name = prompt })
@@ -131,7 +131,7 @@ local _show_nuget_explorer_selection_window = function(selection_opts)
 	ui_utils.open_selection_window(opts)
 end
 
-local _open_project_package_management_window = function(opts)
+local _open_project_package_management_window = function(user_opts, opts)
 	local action = opts.action or 'add'
 
 	local first_selection_title = opts.first_prompt_title or ("Select a project to " .. action .. " package to")
@@ -155,40 +155,29 @@ local _open_project_package_management_window = function(opts)
 			return {
 				response_opts = target_selection_opt,
 				continuation = function(response_opts)
-					return _show_nuget_explorer_selection_window(response_opts)
+					return _show_nuget_explorer_selection_window(user_opts, response_opts)
 				end,
 			}
 		end,
-		entry_maker = function(entry)
-			if entry then
-				return {
-					value = entry,
-					display = entry,
-					ordinal = entry,
-				}
-			end
-		end
 	}
 
-	window_utils.open_project_selection_window(source_selection_opt)
+	window_utils.open_project_selection_window(user_opts, source_selection_opt)
 end
 
-M.open_add_package_window = function()
-	_open_project_package_management_window({
+M.open_add_package_window = function(user_opts)
+	_open_project_package_management_window(user_opts, {
 		action = 'add',
 		first_prompt_title = 'Select a project to add package to',
 		second_prompt_title = 'Select a package to add'
 	})
 end
 
-M.open_remove_package_window = function()
-	_open_project_package_management_window({
+M.open_remove_package_window = function(user_opts)
+	_open_project_package_management_window(user_opts, {
 		action = 'remove',
 		first_prompt_title = 'Select a project to remove package from',
 		second_prompt_title = 'Select a package to remvoe',
 	})
 end
-
-_show_nuget_explorer_selection_window({})
 
 return M

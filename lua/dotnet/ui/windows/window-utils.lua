@@ -1,9 +1,10 @@
-local nvim_utils = require ('dotnet.utils.nvim-utils')
+local nvim_utils = require('dotnet.utils.nvim-utils')
 local telescope_utils = require('telescope.previewers.utils')
 local ui_utils = require('dotnet.ui.ui-utils')
 local path_utils = require('dotnet.utils.path-utils')
+local make_entry = require('telescope.make_entry')
 
-local M = { }
+local M = {}
 
 M.create_telescope_options = function()
 	return {
@@ -14,18 +15,14 @@ M.create_telescope_options = function()
 	}
 end
 
-
-M.open_project_selection_window = function(selection_opts)
+M.open_project_selection_window = function(user_opts, selection_opts)
 	local result_filter = selection_opts.result_filter or function(_, _)
 		return true
 	end
+	local generated_entry_maker = make_entry.gen_from_file({ path_display = { user_opts.project_selection.path_display } })
 	local entry_maker = selection_opts.entry_maker or function(entry)
 		if entry then
-			return {
-				value = entry,
-				display = entry,
-				ordinal = entry,
-			}
+			return generated_entry_maker(entry)
 		end
 	end
 	local opts = {
@@ -78,6 +75,5 @@ M.open_project_selection_window = function(selection_opts)
 
 	ui_utils.open_selection_window(opts)
 end
-
 
 return M

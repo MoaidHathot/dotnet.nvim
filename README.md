@@ -40,10 +40,14 @@ use {
 {
   bootstrap = {
     auto_bootstrap = true, -- Automatically call "bootstrap" when creating a new file, adding a namespace and a class to the files
+  },
+  project_selection = {
+    path_display = 'filename_first' -- Determines how file paths are displayed. All of Telescope's path_display options are supported
   }
 }
-
 ```
+
+Telescope's valid [`path_display`](https://github.com/nvim-telescope/telescope.nvim/blob/5972437de807c3bc101565175da66a1aa4f8707a/doc/telescope.txt#L269). The options may vary depending on the version of Telescope you have installed.
 
 # Usage
 - Adding new item (Project/globaljson/sln, any template you have installed)

@@ -1,10 +1,9 @@
--- local window_utils = require('lua.dotnet.ui.windows.window-utils')
 local window_utils = require('dotnet.ui.windows.window-utils')
 local path_utils = require('dotnet.utils.path-utils')
 
 local M = {}
 
-local _open_project_reference_management_window = function(opts)
+local _open_project_reference_management_window = function(user_opts, opts)
 	local action = opts.action or 'add'
 
 	local first_selection_title = opts.first_selection_title or ("Select a project to " .. action .. " reference to")
@@ -36,25 +35,25 @@ local _open_project_reference_management_window = function(opts)
 			return {
 				response_opts = target_selection_opt,
 				continuation = function(response_opts)
-					return window_utils.open_project_selection_window(response_opts)
+					return window_utils.open_project_selection_window(user_opts, response_opts)
 				end,
 			}
 		end
 	}
 
-	window_utils.open_project_selection_window(source_selection_opt)
+	window_utils.open_project_selection_window(user_opts, source_selection_opt)
 end
 
-M.open_add_project_reference_window = function()
-	_open_project_reference_management_window({
+M.open_add_project_reference_window = function(opts)
+	_open_project_reference_management_window(opts, {
 		action = 'add',
 		first_selection_title = 'Select a project to add reference to',
 		second_selection_title = 'Select a project to reference'
 	})
 end
 
-M.open_remove_project_reference_window = function()
-	_open_project_reference_management_window({
+M.open_remove_project_reference_window = function(opts)
+	_open_project_reference_management_window(opts, {
 		action = 'remove',
 		first_selection_title = 'Select a project to remove reference from',
 		second_selection_title = 'Select a referenced project',

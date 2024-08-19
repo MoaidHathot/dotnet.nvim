@@ -19,7 +19,6 @@ local function create_finder_options(opts)
 
 	if opts.finder.fn then
 		return function()
-			local prompt = opts.prompt
 			return finders.new_dynamic({
 				fn = opts.finder.fn,
 				entry_maker = opts.finder.entry_maker,
@@ -60,7 +59,7 @@ M.open_selection_window = function(opts)
 			end)
 
 			return true
-		end
+		end,
 	})
 
 	picker:find()
