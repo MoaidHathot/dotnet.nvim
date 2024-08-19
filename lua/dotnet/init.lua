@@ -114,7 +114,7 @@ M.setup = function(opts)
 
 	if M.opts.bootstrap.auto_bootstrap then
 		vim.api.nvim_create_autocmd("BufReadPost", {
-			pattern = { "*.cs", "*.fs" },
+			pattern = { "*.cs" },
 			callback = function()
 				local buf = vim.api.nvim_get_current_buf()
 				local line_count = vim.api.nvim_buf_line_count(buf)
