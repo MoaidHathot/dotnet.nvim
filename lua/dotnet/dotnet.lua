@@ -21,14 +21,20 @@ M.bootstrap_new_csharp_file = function(opts)
 		return
 	end
 
+	local typeType = 'class'
+	if string.sub(names.file_name, 1, 1) == "I" then
+		typeType = 'interface'
+	end
+
 	local lines = {
 		'namespace ' .. names.namespace .. ';',
 		'',
-		'public class ' .. names.file_name,
+		'public ' .. typeType .. ' ' .. names.file_name,
 		'{',
 		' ',
 		'}',
 	}
+
 	vim.api.nvim_buf_set_lines(buffer, line_start, line_end, false, lines)
 end
 
