@@ -128,6 +128,4 @@ M.setup = function(opts)
 
 end
 
-M.setup (M.opts)
-
 return M

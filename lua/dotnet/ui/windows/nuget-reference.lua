@@ -176,7 +176,7 @@ M.open_remove_package_window = function(user_opts)
 	_open_project_package_management_window(user_opts, {
 		action = 'remove',
 		first_prompt_title = 'Select a project to remove package from',
-		second_prompt_title = 'Select a package to remvoe',
+		second_prompt_title = 'Select a package to remove',
 	})
 end
 
