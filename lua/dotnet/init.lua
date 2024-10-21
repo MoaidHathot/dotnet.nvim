@@ -25,7 +25,7 @@ local M = {
 
 local function _process_user_opts(opts)
 
-	require('dotnet.utils.nvim-utils').merge_tables(M.opts, opts)
+	require('dotnet.utils.nvim-utils').merge_tables(M.opts, opts or {})
 
 	return M.opts
 end
